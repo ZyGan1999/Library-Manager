@@ -230,34 +230,40 @@ void operation::MENU()
 
 operation::~operation() {
 	/*将bList重新写入文件*/
-	ofstream SaveBookName("c:\\\\Resource\\\\BOOKS\\\\booklist.txt", ios::trunc | ios::app);
+	ofstream SaveBookName("c:\\\\Resource\\\\BOOKS\\\\booklist.txt", ios::ate);
+	bool flag = false;
 	for (std::list<Book>::iterator i = bList.begin(); i != bList.end(); ++i) {
-		SaveBookName << i->getName() << endl;
+		if (flag) SaveBookName << endl;
+		flag = true;
+		SaveBookName << i->getName();
 	}
 	for (std::list<Book>::iterator i = bList.begin(); i != bList.end(); ++i) {
 		string name = i->getName();
 		name += ".txt";
-		ofstream SaveBook("c:\\\\Resource\\\\BOOKS\\\\" + name, ios::trunc | ios::app);
+		ofstream SaveBook("c:\\\\Resource\\\\BOOKS\\\\" + name, ios::ate);
 		SaveBook << i->getID() << endl << i->isInStorage() << endl << i->getAuthorName() << endl
 			<< i->getPublisherName() << endl << i->getContent() << endl;
 	}
 
 	/*将eList重新写入文件*/
-	ofstream SaveEassyName("c:\\\\Resource\\\\EASSYS\\\\eassylist.txt", ios::trunc | ios::app);
+	ofstream SaveEassyName("c:\\\\Resource\\\\EASSYS\\\\eassylist.txt", ios::ate);
+	flag = false;
 	for (std::list<Eassy>::iterator i = eList.begin(); i != eList.end(); ++i) {
-		SaveEassyName << i->getName() << endl;
+		if (flag) SaveEassyName << endl;
+		flag = true;
+		SaveEassyName << i->getName();
 	}
 	for (std::list<Eassy>::iterator i = eList.begin(); i != eList.end(); ++i) {
 		string name = i->getName();
 		name += ".txt";
-		ofstream SaveEassy("c:\\\\Resource\\\\EASSYS\\\\" + name, ios::trunc | ios::app);
+		ofstream SaveEassy("c:\\\\Resource\\\\EASSYS\\\\" + name, ios::ate);
 		SaveEassy << i->getID() << endl << i->isInStorage() << endl 
 			<< i->getAuthorName() << endl << i->getContent() << endl;
 	}
 
 	/*将uList重新写入文件*/
 	ofstream SaveUserName("c:\\\\Resource\\\\USERS\\\\userlist.txt", ios::ate);
-	bool flag = false;
+	flag = false;
 	for (std::list<User>::iterator i = uList.begin(); i != uList.end(); ++i) {
 		if (flag) SaveUserName << endl;
 		flag = true;
